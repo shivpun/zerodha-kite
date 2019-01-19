@@ -21,3 +21,15 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/.project
+/.settings/
+/kite-core/.classpath
+/kite-core/.factorypath
+/kite-core/.project
+/kite-core/.settings/
+/kite-core/target/
+/kite-tick/.classpath
+/kite-tick/.factorypath
+/kite-tick/.project
+/kite-tick/.settings/
+/kite-tick/target/
