@@ -16,6 +16,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<start-class>com.zerodha.kite.Application</start-class>
+		<docker.image.prefix>springio</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -57,14 +58,38 @@
 				<configuration>
 					<mainClass>${start-class}</mainClass>
 				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.28.0</version>
+				<configuration>
+					<verbose>true</verbose>
+					<images>
+						<image>
+							<build>
+								<dockerDirectory>${project.basedir}/external/docker/kite-tick</dockerDirectory>
+							</build>
+							<name>
+								${project.artifactId}:${project.version}
+							</name>
+						</image>
+					</images>
+					<buildArgs>
+						<docker.buildArg.JAR_FILE>${project.basedir}/kite-tick/target/${project.artifactId}-${project.version}.jar</docker.buildArg.JAR_FILE>
+					</buildArgs>
+					
+				</configuration>
+			</plugin>
+			<!-- <plugin> <groupId>com.spotify</groupId> <artifactId>dockerfile-maven-plugin</artifactId> 
+				<version>1.4.10</version> <executions> <execution> <id>build-image</id> <phase>package</phase> 
+				<goals> <goal>build</goal> <goal>push</goal> </goals> </execution> </executions> 
+				<configuration> <repository>${docker.image.prefix}/${project.artifactId}</repository> 
+				<imageName>dockerexample</imageName> <baseImage>openjdk:8-jdk-alpine</baseImage> 
+				<entryPoint>["java", "-jar", "/${project.artifactId}-${project.version}.jar"]</entryPoint> 
+				<resources> <resource> <targetPath>/</targetPath> <directory>${project.build.directory}</directory> 
+				<include>${project.artifactId}-${project.version}.jar</include> </resource> 
+				</resources> </configuration> </plugin> -->
 		</plugins>
 	</build>
 </project>

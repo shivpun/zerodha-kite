@@ -40,6 +40,13 @@ public class DateUtil {
 		}
 		return null;
 	}
+	
+	public static java.sql.Date getDate(Date date) {
+		if(date!=null) {
+			return new java.sql.Date(date.getTime());
+		}
+		return null;
+	}
 
 	public static DateFormat dateFormat(String format) {
 		return new SimpleDateFormat(format);
