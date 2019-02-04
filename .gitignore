@@ -33,3 +33,11 @@ hs_err_pid*
 /kite-tick/.project
 /kite-tick/.settings/
 /kite-tick/target/
+/kite-algo/.settings/
+/kite-algo/.classpath
+/kite-algo/.project
+/kite-algo/target/
+/kite-web/.settings/
+/kite-web/target/
+/kite-web/.project
+/kite-web/.classpath
