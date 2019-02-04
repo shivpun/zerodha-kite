@@ -28,6 +28,18 @@ public class KiteTickUtil {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(KiteTickUtil.class);
 	
+	public static String subscribe(Long token) {
+		List<Long> tokens = new ArrayList<Long>();
+		tokens.add(token);
+		return subscribe(tokens);
+	}
+	
+	public static String mode(Long token, String mode) {
+		List<Long> tokens = new ArrayList<Long>();
+		tokens.add(token);
+		return mode(tokens, mode);
+	}
+	
 	public static String subscribe(List<Long> tokens) {
 		Map<String, Object> subscribe = new HashMap<String, Object>();
 		subscribe.put("a", SUBSCRIBE);

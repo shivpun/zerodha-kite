@@ -3,6 +3,9 @@ package com.zerodha.kite.contant;
 public class KiteConstant {
 	
 	public static final String X_KITE_VERSION = "1.14.0";
+	
+	public static final Double ZERO = new Double(0);
+	
 	/** Product types. */
 	public static final String PRODUCT_MIS = "MIS";
 	public static final String PRODUCT_CNC = "CNC";

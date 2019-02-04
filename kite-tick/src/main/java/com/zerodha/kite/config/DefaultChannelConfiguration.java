@@ -82,8 +82,10 @@ public class DefaultChannelConfiguration {
 		List<Long> tokens = jdbcTemplate.queryForList(SELECT_TOKEN_FROM_INSTRUMENT, Long.class);
 		KiteMessage kiteMessage = new KiteMessage();
 		kiteMessage.setKiteUser(kiteUser);
-		kiteMessage.addMessage(KiteTickUtil.subscribe(tokens));
-		kiteMessage.addMessage(KiteTickUtil.mode(tokens, MODE_FULL));
+		for(Long token:tokens) {
+			kiteMessage.addMessage(KiteTickUtil.subscribe(token));
+			kiteMessage.addMessage(KiteTickUtil.mode(token, MODE_FULL));
+		}
 		kiteMessage.addHeader("Cookie", cookie);
 		KiteHeader.defaultWebSocket(kiteMessage);
 		return kiteMessage;
