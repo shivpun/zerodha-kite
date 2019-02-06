@@ -40,9 +40,9 @@ public class DateUtil {
 		}
 		return null;
 	}
-	
+
 	public static java.sql.Date getDate(Date date) {
-		if(date!=null) {
+		if (date != null) {
 			return new java.sql.Date(date.getTime());
 		}
 		return null;
@@ -50,5 +50,10 @@ public class DateUtil {
 
 	public static DateFormat dateFormat(String format) {
 		return new SimpleDateFormat(format);
+	}
+
+	public static int minute(Date start, Date end) {
+		long diff = start.getTime() - end.getTime();
+		return (int) (diff / (60 * 1000));
 	}
 }

@@ -2,6 +2,7 @@ package com.zerodha.kite.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,8 @@ public class KiteMessage implements Serializable {
 	private static final long serialVersionUID = -5735645080100184264L;
 	
 	private KiteUser kiteUser;
+	
+	private Date start = new Date();
 	
 	private Map<String, String> headers = new HashMap<String, String>();
 	
@@ -42,5 +45,13 @@ public class KiteMessage implements Serializable {
 	
 	public Map<String, String> getHeader() {
 		return this.headers;
+	}
+
+	public Date getStart() {
+		return start;
+	}
+
+	public void setStart(Date start) {
+		this.start = start;
 	}
 }

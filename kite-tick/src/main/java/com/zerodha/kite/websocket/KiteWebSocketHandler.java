@@ -1,5 +1,6 @@
 package com.zerodha.kite.websocket;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -48,10 +49,15 @@ public class KiteWebSocketHandler extends WebSocketAdapter {
 		}
 		if(messageChannel!=null) {
 			List<Tick> ticks = KiteTickUtil.parseBinary(packet);
+			Date today = new Date();
 			int size = ticks.size();
 			LOGGER.info(String.format("[%s] Stock Tick size [%s] with data [%s] ", "onBinaryMessage", size, ticks));
 			Message<List<Tick>> message = MessageBuilder.withPayload(ticks).build();
 			messageChannel.send(message);
+			if(size>0) {
+				LOGGER.info(String.format("[%s] Stock Tick size [%s] set today [%s] ", "onBinaryMessage", size, today));
+				kiteMessage.setStart(today);
+			}
 		}
 	}
 }
