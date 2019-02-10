@@ -24,6 +24,7 @@ public class KiteRouteUtil {
 		List<Object> urlParams = new ArrayList<Object>();
 		urlParams.add(chartUser.getToken().intValue());
 		urlParams.add(chartUser.getTimeFrame());
+		urlParams.add(chartUser.getFrame());
 		urlParams.add(chartUser.getPublicToken());
 		urlParams.add(chartUser.getUserId());
 		urlParams.add(chartUser.getAccessToken());

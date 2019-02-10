@@ -11,6 +11,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.zerodha.kite.contant.KiteDateFormat;
+
 @RunWith(SpringRunner.class)
 public class DateUtilTest {
 	
@@ -25,5 +27,11 @@ public class DateUtilTest {
 	public void testNullGetTimeStamp() {
 		Timestamp timestamp = DateUtil.getTimeStamp(null);
 		assertNull(timestamp);
+	}
+	
+	@Test
+	public void next7() {
+		Date fromDate = DateUtil.cal(DateUtil.getDate("1944-12-31", KiteDateFormat.DATE_MM_CHART_FORMAT), 6);
+		System.out.println((DateUtil.getDate(fromDate, KiteDateFormat.DATE_MM_CHART_FORMAT)));
 	}
 }

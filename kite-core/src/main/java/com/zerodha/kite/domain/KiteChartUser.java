@@ -12,6 +12,8 @@ public class KiteChartUser implements Serializable {
 	
 	private Integer timeFrame;
 	
+	private String frame = "minute";
+	
 	private String publicToken;
 	
 	private String accessToken;
@@ -40,6 +42,13 @@ public class KiteChartUser implements Serializable {
 
 	public Integer getTimeFrame() {
 		return timeFrame;
+	}
+
+	public String getTimeFrames() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(timeFrame);
+		sb.append(frame);
+		return sb.toString();
 	}
 
 	public void setTimeFrame(Integer timeFrame) {
@@ -84,6 +93,28 @@ public class KiteChartUser implements Serializable {
 
 	public void setCookie(String cookie) {
 		this.cookie = cookie;
+	}
+	
+	public String getFrame() {
+		return frame;
+	}
+
+	public void setFrame(String frame) {
+		this.frame = frame;
+	}
+
+	public KiteChartUser kiteChartUser() {
+		KiteChartUser kiteChartUser = new KiteChartUser();
+		kiteChartUser.setAccessToken(accessToken);
+		kiteChartUser.setCookie(cookie);
+		kiteChartUser.setFromDate(fromDate);
+		kiteChartUser.setPublicToken(publicToken);
+		kiteChartUser.setUserId(userId);
+		kiteChartUser.setToDate(toDate);
+		kiteChartUser.setTimeFrame(timeFrame);
+		kiteChartUser.setToken(token);
+		kiteChartUser.setFrame(frame);
+		return kiteChartUser;
 	}
 
 	@Override

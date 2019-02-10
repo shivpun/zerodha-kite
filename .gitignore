@@ -41,3 +41,7 @@ hs_err_pid*
 /kite-web/target/
 /kite-web/.project
 /kite-web/.classpath
+/kite-sample/.settings/
+/kite-sample/target/
+/kite-sample/.project
+/kite-sample/.classpath

@@ -12,5 +12,5 @@ public class KiteRoutes {
 	
 	public static final String KITE_CHART_HOST = "https://kite.zerodha.com";
 	
-	public static final String KITE_CHARTS = "https://kitecharts-aws.zerodha.com/api/chart/{TOKEN}/{TIME_FRAME}minute?public_token={PUBLIC_TOKEN}&user_id={USER_ID}&api_key=kitefront&access_token={ACCESS_TOKEN}&from={FROM_DATE}&to={TO_DATE}&ciqrandom="+(new Date().getTime());
+	public static final String KITE_CHARTS = "https://kitecharts-aws.zerodha.com/api/chart/{TOKEN}/{TIME}{FRAME}?public_token={PUBLIC_TOKEN}&user_id={USER_ID}&api_key=kitefront&access_token={ACCESS_TOKEN}&from={FROM_DATE}&to={TO_DATE}&ciqrandom="+(new Date().getTime());
 }

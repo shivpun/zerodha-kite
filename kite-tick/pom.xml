@@ -68,6 +68,8 @@
 					<images>
 						<image>
 							<build>
+								<from>
+								</from>
 								<dockerDirectory>${project.basedir}/external/docker/kite-tick</dockerDirectory>
 							</build>
 							<name>
