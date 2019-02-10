@@ -29,7 +29,7 @@ public class DateUtil {
 		calendar.add(Calendar.DAY_OF_MONTH, num);
 		return calendar.getTime();
 	}
-
+	
 	public static Date getDate(String source, String format) {
 		if (source != null) {
 			try {

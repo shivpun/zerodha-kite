@@ -41,11 +41,12 @@ public class KiteChartRepository {
 					ps.setDouble(8, ohcl.getLWick());
 					ps.setDouble(9, ohcl.getBody());
 					ps.setDouble(10, ohcl.getProfit());
-					ps.setInt(11, kiteChart.getTimeframe());
-					ps.setTimestamp(12, DateUtil.getTimeStamp(ohcl.getChartTimeStamp()));
-					ps.setString(13, ohcl.getTimeStamp());
-					ps.setString(14, ohcl.getCandleType());
-					ps.setString(15, ohcl.pattern());
+					ps.setDouble(11, ohcl.getVolume());
+					ps.setInt(12, kiteChart.getTimeframe());
+					ps.setTimestamp(13, DateUtil.getTimeStamp(ohcl.getChartTimeStamp()));
+					ps.setString(14, ohcl.getTimeStamp());
+					ps.setString(15, ohcl.getCandleType());
+					ps.setString(16, ohcl.pattern());
 				}
 			});
 			kiteJdbcAlgo(ohcl.getAlgorithm());

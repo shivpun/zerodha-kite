@@ -32,7 +32,7 @@ public class CandleStickUtil {
 	}
 	
 	public static boolean gravestoneDoji(OHLC ohlc) {
-		boolean flag = ZERO.equals(ohlc.getBody()) && ohlc.getUWick()>0;
+		boolean flag = ZERO.equals(ohlc.getBody()) && ohlc.getUWick()>0 && ZERO.equals(ohlc.getLWick());
 		if(flag) {
 			ohlc.addPattern(KiteChartConstant.CANDLE_GRAVESTONE_DOJI);
 		}
@@ -40,7 +40,7 @@ public class CandleStickUtil {
 	}
 	
 	public static boolean dragonflyDoji(OHLC ohlc) {
-		boolean flag = ZERO.equals(ohlc.getBody()) && ohlc.getLWick()>0;
+		boolean flag = ZERO.equals(ohlc.getBody()) && ohlc.getLWick()>0 && ZERO.equals(ohlc.getUWick());
 		if(flag) {
 			ohlc.addPattern(KiteChartConstant.CANDLE_DRAGONFLY_DOJI);
 		}

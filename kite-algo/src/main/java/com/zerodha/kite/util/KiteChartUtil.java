@@ -23,6 +23,7 @@ public class KiteChartUtil {
 			ohlc.setHigh(Double.valueOf(String.valueOf(vals.get(2))));
 			ohlc.setLow(Double.valueOf(String.valueOf(vals.get(3))));
 			ohlc.setClose(Double.valueOf(String.valueOf(vals.get(4))));
+			ohlc.setVolume(Double.valueOf(String.valueOf(vals.get(5))));
 			CandleStickUtil.candleStick(ohlc);
 			
 			sma(sma200, ohlc);

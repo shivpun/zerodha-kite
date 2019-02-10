@@ -33,6 +33,8 @@ public class KiteWebSocketHandler extends WebSocketAdapter {
 	@Override
 	public void onConnected(WebSocket websocket, Map<String, List<String>> headers) throws Exception {
 		if(kiteMessage!=null && !CollectionUtils.isEmpty(kiteMessage.getMessage())) {
+			Date today = new Date();
+			kiteMessage.setStart(today);
 			for(String message:kiteMessage.getMessage()) {
 				LOGGER.info(String.format("Kite send message has [%s]", message));
 				websocket.sendText(message);

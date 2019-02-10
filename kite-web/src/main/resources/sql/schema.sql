@@ -5,6 +5,7 @@ ALGO_NAME VARCHAR(5000),
 TOKEN numeric,
 algo_value numeric,
 TIME_FRAME NUMERIC,
-chartTime varchar(5000)
+chartTime varchar(5000),
+START_VALUE NUMERIC
 );
 

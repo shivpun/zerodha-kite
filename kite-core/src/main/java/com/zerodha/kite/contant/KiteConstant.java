@@ -26,6 +26,7 @@ public class KiteConstant {
 	/** Transaction types. */
 	public static final String TRANSACTION_TYPE_BUY = "BUY";
 	public static final String TRANSACTION_TYPE_SELL = "SELL";
+	public static final String TRANSACTION_TYPE_WAIT = "WAIT";
 
 	/** Position types. */
 	public static final String POSITION_DAY = "day";
