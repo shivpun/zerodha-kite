@@ -45,3 +45,7 @@ hs_err_pid*
 /kite-sample/target/
 /kite-sample/.project
 /kite-sample/.classpath
+/kite-batch/.project
+/kite-batch/.classpath
+/kite-batch/target/
+/kite-batch/.settings/
