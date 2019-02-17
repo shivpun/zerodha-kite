@@ -3,6 +3,8 @@ package com.zerodha.kite.algo;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.zerodha.kite.util.KiteNumberUtil;
+
 public class SimpleMovingAverage implements Algo {
 
 	private final String field;
@@ -27,7 +29,7 @@ public class SimpleMovingAverage implements Algo {
 		this.sum += values;
 		window.add(values);
 		if (window.size() >= period) {
-			this.avg = sum/period;
+			this.avg = KiteNumberUtil.round(sum/period);
 			this.startValue = window.remove();
 			this.sum -= this.startValue;
 		}
