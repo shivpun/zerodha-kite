@@ -34,4 +34,6 @@ public class KiteChartQuery {
 			"candleType," +
 			"pattern"+
 			") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	
+	public static final String SELECT_KITE_OHLC = "SELECT ohcl_id, token_id, open, high, close, low, uw, lw, body, profit, volume, timeframe, charttime, candletype FROM OHLC WHERE substring(charttime from 1 for 10) between :chartTime_1 and :chartTime_2 and timeframe = :timeframe and token_id = :tokenId order by charttime asc"; 
 }

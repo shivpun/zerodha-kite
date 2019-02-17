@@ -12,12 +12,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class DatabaseConfiguration {
 
 	@Bean
-	public DataSource dataSource(@Value(value="${spring.datasource.url}") String url, @Value(value="${spring.datasource.username}") String username, @Value(value="${spring.datasource.password}") String password, @Value(value="${spring.datasource.driver-class-name}") String driverClassName) {
-		DataSource dataSource = DataSourceBuilder.create()
-												 .url(url)
-												 .username(username)
-												 .password(password)
-												 .driverClassName(driverClassName).build();
+	public DataSource dataSource(@Value(value = "${spring.datasource.url}") String url,
+			@Value(value = "${spring.datasource.username}") String username,
+			@Value(value = "${spring.datasource.password}") String password,
+			@Value(value = "${spring.datasource.driver-class-name}") String driverClassName) {
+		DataSource dataSource = DataSourceBuilder.create().url(url).username(username).password(password)
+				.driverClassName(driverClassName).build();
 		return dataSource;
 	}
 
@@ -31,4 +31,9 @@ public class DatabaseConfiguration {
 		DefaultKiteTickDataBase kiteTickDataBase = new DefaultKiteTickDataBase(jdbcTemplate);
 		return kiteTickDataBase;
 	}
+
+	/*
+	 * @Bean public HazelcastInstance hazelcastInstance() { return
+	 * Hazelcast.newHazelcastInstance(); }
+	 */
 }

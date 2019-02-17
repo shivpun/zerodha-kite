@@ -8,30 +8,54 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import com.zerodha.kite.contant.KiteDateFormat;
 import com.zerodha.kite.util.DateUtil;
 import com.zerodha.kite.util.KiteNumberUtil;
 
+@Entity
+@Table(name = "OHLC")
 public class OHLC implements Serializable {
 
 	private static final long serialVersionUID = 5737185416814456006L;
 
+	@Id
+	@Column(name = "ohcl_id")
+	private double ohclId;
+
+	@Column(name = "open")
 	private double open;
 
+	@Column(name = "high")
 	private double high;
 
+	@Column(name = "low")
 	private double low;
 
+	@Column(name = "close")
 	private double close;
-	
+
+	@Column(name = "volume")
 	private double volume;
 
+	@Transient
 	private Date chartTimeStamp;
 	
+	@Column(name = "timeframe")
+	private String timeframe;
+
+	@Column(name = "charttime")
 	private String timeStamp;
-	
+
+	@Transient
 	private List<Algorithm> algorithm = new ArrayList<Algorithm>();
-	
+
+	@Transient
 	public List<String> pattern = new ArrayList<String>();
 
 	public double getBody() {
@@ -57,14 +81,14 @@ public class OHLC implements Serializable {
 	public double getProfit() {
 		return KiteNumberUtil.round(high - low);
 	}
-	
-    public String getCandleType() {
-    	String candleType = null;
-    	if(getBody()>0) {
-    		candleType = BULLISH;
-    	} else {
-    		candleType = BEARISH;
-    	}
+
+	public String getCandleType() {
+		String candleType = null;
+		if (getBody() > 0) {
+			candleType = BULLISH;
+		} else {
+			candleType = BEARISH;
+		}
 		return candleType;
 	}
 
@@ -99,7 +123,7 @@ public class OHLC implements Serializable {
 	public void setClose(double close) {
 		this.close = close;
 	}
-	
+
 	public double getVolume() {
 		return volume;
 	}
@@ -115,7 +139,7 @@ public class OHLC implements Serializable {
 	public void setChartTimeStamp(String chartTimeStamp) {
 		this.chartTimeStamp = DateUtil.getDate(chartTimeStamp, KiteDateFormat.DATE_CHART_TIMESTAMP_FORMAT);
 	}
-	
+
 	public void addPattern(String pattern) {
 		getPattern().add(pattern);
 	}
@@ -124,14 +148,23 @@ public class OHLC implements Serializable {
 		return pattern;
 	}
 	
+
+	public String getTimeframe() {
+		return timeframe;
+	}
+
+	public void setTimeframe(String timeframe) {
+		this.timeframe = timeframe;
+	}
+
 	public String pattern() {
 		StringBuilder sb = new StringBuilder();
-		for(String pattern:getPattern()) {
-			sb.append(pattern+",");
+		for (String pattern : getPattern()) {
+			sb.append(pattern + ",");
 		}
 		return sb.toString();
 	}
-	
+
 	public String getTimeStamp() {
 		return timeStamp;
 	}
@@ -151,7 +184,7 @@ public class OHLC implements Serializable {
 	public void setPattern(List<String> pattern) {
 		this.pattern = pattern;
 	}
-	
+
 	public void addAlgo(Algorithm algo) {
 		getAlgorithm().add(algo);
 	}

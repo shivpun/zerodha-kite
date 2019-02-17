@@ -11,6 +11,17 @@ public class KiteChart {
 	
 	private List<OHLC> ohlcs = new ArrayList<OHLC>();
 	
+	public KiteChart() {
+		super();
+	}
+	
+	public KiteChart(double tokenId, Integer timeframe, OHLC ohlc) {
+		super();
+		this.tokenId = tokenId;
+		this.timeframe = timeframe;
+		addOHCL(ohlc);
+	}
+
 	public void addOHCL(OHLC ohlc) {
 		ohlcs.add(ohlc);
 	}
