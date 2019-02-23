@@ -29,6 +29,8 @@ public class OHLC implements Serializable {
 	private Date chartTimeStamp;
 
 	private String timeStamp;
+	
+	private int timeframe;
 
 	private List<Algorithm> algorithm = new ArrayList<Algorithm>();
 
@@ -172,5 +174,9 @@ public class OHLC implements Serializable {
 
 	public void addAlgo(Algorithm algo) {
 		getAlgorithm().add(algo);
+	}
+
+	public Object getTimeframe() {
+		return timeframe;
 	}
 }
