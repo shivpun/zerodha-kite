@@ -8,55 +8,45 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
 import com.zerodha.kite.contant.KiteDateFormat;
 import com.zerodha.kite.util.DateUtil;
 import com.zerodha.kite.util.KiteNumberUtil;
 
-@Entity
-@Table(name = "OHLC")
 public class OHLC implements Serializable {
 
 	private static final long serialVersionUID = 5737185416814456006L;
 
-	@Id
-	@Column(name = "ohcl_id")
-	private double ohclId;
-
-	@Column(name = "open")
 	private double open;
 
-	@Column(name = "high")
 	private double high;
 
-	@Column(name = "low")
 	private double low;
 
-	@Column(name = "close")
 	private double close;
 
-	@Column(name = "volume")
 	private double volume;
 
-	@Transient
 	private Date chartTimeStamp;
-	
-	@Column(name = "timeframe")
-	private String timeframe;
 
-	@Column(name = "charttime")
 	private String timeStamp;
 
-	@Transient
 	private List<Algorithm> algorithm = new ArrayList<Algorithm>();
 
-	@Transient
 	public List<String> pattern = new ArrayList<String>();
+	
+	public OHLC() {}
+	
+	public OHLC(OHLC ohlc) {
+		if(chartTimeStamp==null) {
+			this.low = ohlc.low;
+			this.open = ohlc.open;
+			this.high = ohlc.high;
+		}
+		this.close = ohlc.close;
+		this.high = Math.max(high, ohlc.high);
+		this.low = Math.min(low, ohlc.low);
+		this.volume = this.volume + ohlc.volume;
+	}
 
 	public double getBody() {
 		return KiteNumberUtil.round(close - open);
@@ -80,6 +70,10 @@ public class OHLC implements Serializable {
 
 	public double getProfit() {
 		return KiteNumberUtil.round(high - low);
+	}
+
+	public double profitPercent() {
+		return Math.abs(KiteNumberUtil.round((getProfit()/ low) * 100));
 	}
 
 	public String getCandleType() {
@@ -146,15 +140,6 @@ public class OHLC implements Serializable {
 
 	public List<String> getPattern() {
 		return pattern;
-	}
-	
-
-	public String getTimeframe() {
-		return timeframe;
-	}
-
-	public void setTimeframe(String timeframe) {
-		this.timeframe = timeframe;
 	}
 
 	public String pattern() {
