@@ -6,7 +6,7 @@ public class KiteNumberUtil {
 	
     public static double round(double value) {
     	BigDecimal decimal = new BigDecimal(value);
-    	return decimal.setScale(2, BigDecimal.ROUND_UP).doubleValue();
+    	return decimal.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
     
     public static boolean lessThanOneAndGreaterThanZero(Double value) {

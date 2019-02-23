@@ -23,16 +23,30 @@ public class OHLC implements Serializable {
 	private double low;
 
 	private double close;
-	
+
 	private double volume;
 
 	private Date chartTimeStamp;
-	
+
 	private String timeStamp;
-	
+
 	private List<Algorithm> algorithm = new ArrayList<Algorithm>();
-	
+
 	public List<String> pattern = new ArrayList<String>();
+	
+	public OHLC() {}
+	
+	public OHLC(OHLC ohlc) {
+		if(chartTimeStamp==null) {
+			this.low = ohlc.low;
+			this.open = ohlc.open;
+			this.high = ohlc.high;
+		}
+		this.close = ohlc.close;
+		this.high = Math.max(high, ohlc.high);
+		this.low = Math.min(low, ohlc.low);
+		this.volume = this.volume + ohlc.volume;
+	}
 
 	public double getBody() {
 		return KiteNumberUtil.round(close - open);
@@ -57,14 +71,18 @@ public class OHLC implements Serializable {
 	public double getProfit() {
 		return KiteNumberUtil.round(high - low);
 	}
-	
-    public String getCandleType() {
-    	String candleType = null;
-    	if(getBody()>0) {
-    		candleType = BULLISH;
-    	} else {
-    		candleType = BEARISH;
-    	}
+
+	public double profitPercent() {
+		return Math.abs(KiteNumberUtil.round((getProfit()/ low) * 100));
+	}
+
+	public String getCandleType() {
+		String candleType = null;
+		if (getBody() > 0) {
+			candleType = BULLISH;
+		} else {
+			candleType = BEARISH;
+		}
 		return candleType;
 	}
 
@@ -99,7 +117,7 @@ public class OHLC implements Serializable {
 	public void setClose(double close) {
 		this.close = close;
 	}
-	
+
 	public double getVolume() {
 		return volume;
 	}
@@ -115,7 +133,7 @@ public class OHLC implements Serializable {
 	public void setChartTimeStamp(String chartTimeStamp) {
 		this.chartTimeStamp = DateUtil.getDate(chartTimeStamp, KiteDateFormat.DATE_CHART_TIMESTAMP_FORMAT);
 	}
-	
+
 	public void addPattern(String pattern) {
 		getPattern().add(pattern);
 	}
@@ -123,15 +141,15 @@ public class OHLC implements Serializable {
 	public List<String> getPattern() {
 		return pattern;
 	}
-	
+
 	public String pattern() {
 		StringBuilder sb = new StringBuilder();
-		for(String pattern:getPattern()) {
-			sb.append(pattern+",");
+		for (String pattern : getPattern()) {
+			sb.append(pattern + ",");
 		}
 		return sb.toString();
 	}
-	
+
 	public String getTimeStamp() {
 		return timeStamp;
 	}
@@ -151,7 +169,7 @@ public class OHLC implements Serializable {
 	public void setPattern(List<String> pattern) {
 		this.pattern = pattern;
 	}
-	
+
 	public void addAlgo(Algorithm algo) {
 		getAlgorithm().add(algo);
 	}
