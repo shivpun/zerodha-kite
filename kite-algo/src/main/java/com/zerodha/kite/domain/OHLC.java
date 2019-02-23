@@ -38,9 +38,9 @@ public class OHLC implements Serializable {
 	
 	public OHLC(OHLC ohlc) {
 		if(chartTimeStamp==null) {
-			this.low = ohlc.low;
 			this.open = ohlc.open;
 			this.high = ohlc.high;
+			this.low = ohlc.low;
 		}
 		this.close = ohlc.close;
 		this.high = Math.max(high, ohlc.high);
