@@ -6,7 +6,7 @@ import java.util.List;
 import com.zerodha.kite.domain.OHLC;
 import com.zerodha.kite.util.KiteNumberUtil;
 
-public class PivotFloor {
+public class PivotWoodie {
 	
 	private final OHLC ohlc;
 	
@@ -16,9 +16,9 @@ public class PivotFloor {
 	
 	private List<Double> resistance = new ArrayList<Double>();
 	
-	public PivotFloor(OHLC ohlc) {
+	public PivotWoodie(OHLC ohlc) {
 		this.ohlc = ohlc;
-		this.pivot = (this.ohlc.getHigh()+this.ohlc.getLow()+this.ohlc.getClose())/3;
+		this.pivot = (this.ohlc.getHigh()+this.ohlc.getLow()+ 2*this.ohlc.getClose())/4;
 		addSupport((2*this.pivot)-this.ohlc.getHigh());
 		addSupport(this.pivot-this.ohlc.getHigh()+this.ohlc.getLow());
 		addSupport(this.ohlc.getLow()-2*(this.ohlc.getHigh()-this.pivot));
@@ -36,19 +36,21 @@ public class PivotFloor {
 		return this.resistance;
 	}
 	
-	public void addSupport(double values) {
-		this.support.add(KiteNumberUtil.round(values));
-	}
-	
-	public void addResistance(double values) {
-		this.resistance.add(KiteNumberUtil.round(values));
-	}
-	
 	public double pivot() {
 		return KiteNumberUtil.round(this.pivot);
 	}
 	
+	public void addSupport(double values) {
+		System.out.println("Support:"+values);
+		this.support.add(KiteNumberUtil.round(values));
+	}
+	
+	public void addResistance(double values) {
+		System.out.println("Resistance:"+values);
+		this.resistance.add(KiteNumberUtil.round(values));
+	}
+	
 	public String name() {
-		return "PP_Floor";
+		return "PP_Woodie";
 	}
 }
