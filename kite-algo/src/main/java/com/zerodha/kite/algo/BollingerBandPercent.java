@@ -3,6 +3,8 @@ package com.zerodha.kite.algo;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.zerodha.kite.util.KiteNumberUtil;
+
 public class BollingerBandPercent {
 
 	private final String field;
@@ -37,7 +39,8 @@ public class BollingerBandPercent {
 			double stdDev = stdDev();
 			this.upper = this.avg + stdDev * 2;
 			this.lower = this.avg - stdDev * 2;
-			this.percent = (this.startValue - this.lower)/(this.upper - this.lower);
+			this.percent = KiteNumberUtil.round((this.startValue - this.lower)*100/(this.upper - this.lower));
+			System.out.println(stdDev+" ooo "+upper+" | kk:"+lower+" | jk:"+percent);
 			this.startValue = this.window.remove();
 			this.sum -= this.startValue;
 		}
@@ -52,7 +55,7 @@ public class BollingerBandPercent {
 		for (double num : window) {
 			stdDev += Math.pow(num - this.avg, 2);
 		}
-		return Math.sqrt(stdDev / period);
+		return KiteNumberUtil.round(Math.sqrt(stdDev / period));
 	}
 	
 	@Override

@@ -11,6 +11,7 @@ import org.springframework.expression.EvaluationContext;
 import org.springframework.stereotype.Component;
 
 import com.zerodha.kite.algo.Algo;
+import com.zerodha.kite.algo.BollingerBandPercent;
 import com.zerodha.kite.algo.SimpleMovingAverage;
 import com.zerodha.kite.domain.OHLC;
 import com.zerodha.kite.util.KiteExprUtil;
@@ -31,6 +32,7 @@ public class OHLCProcessor implements ItemProcessor<List<OHLC>, List<Map<Integer
 		Map<Integer, Object[]> map = new HashMap<>();
 		int count = 1;
 
+		BollingerBandPercent bandPercent = new BollingerBandPercent("close", 20);
 		OHLC p_oh = null;
 		for (OHLC ohlc : item) {
 			double up = 0, down = 0;
@@ -45,6 +47,8 @@ public class OHLCProcessor implements ItemProcessor<List<OHLC>, List<Map<Integer
 			obj.add(ohlc.getCandleType());
 			obj.add(KiteNumberUtil.round(sma50.cal(ohlc.getClose())));
 			obj.add(KiteNumberUtil.round(sma200.cal(ohlc.getClose())));
+			bandPercent.addData(ohlc.getClose());
+			obj.add(bandPercent.cal());
 			if (p_oh != null) {
 				EvaluationContext context = KiteExprUtil.context(ohlc, p_oh);
 				for(String v:cmp) {
