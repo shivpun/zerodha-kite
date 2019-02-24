@@ -28,7 +28,7 @@ public class OHLCJdbcReader implements ItemReader<List<OHLC>> {
 	public List<OHLC> read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
 		List<OHLC> ohlcs = null;
 		if(timeframes.size()>count) {
-		 ohlcs = ohlcRepository.findByChartTime("2019-02-15", "2019-02-15", timeframes.get(count), 341249);
+		 ohlcs = ohlcRepository.findByChartTime("2019-02-17", "2019-02-22", timeframes.get(count), 341249);
 		count = count + 1;
 		}
 		System.out.println(ohlcs+" OHLC READER");

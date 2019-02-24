@@ -8,39 +8,70 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Immutable;
+
 import com.zerodha.kite.contant.KiteDateFormat;
 import com.zerodha.kite.util.DateUtil;
 import com.zerodha.kite.util.KiteNumberUtil;
 
+@Entity
+@Immutable
+@Table(name = "ohlc")
 public class OHLC implements Serializable {
 
 	private static final long serialVersionUID = 5737185416814456006L;
 
+	@Id
+	@Column(name = "ohcl_id")
+	private double ohlcId;
+
+	@Column(name = "token_id")
+	private double tokenId;
+
+	@Column(name = "open")
 	private double open;
 
+	@Column(name = "high")
 	private double high;
 
+	@Column(name = "low")
 	private double low;
 
+	@Column(name = "close")
 	private double close;
 
+	@Column(name = "volume")
 	private double volume;
 
+	@Transient
 	private Date chartTimeStamp;
 
+	@Column(name = "charttime")
 	private String timeStamp;
 
+	@Column(name = "timeframe")
+	private String timeframe;
+
+	@Transient
 	private List<Algorithm> algorithm = new ArrayList<Algorithm>();
 
+	@Transient
 	public List<String> pattern = new ArrayList<String>();
-	
-	public OHLC() {}
-	
+
+	public OHLC() {
+	}
+
 	public OHLC(OHLC ohlc) {
-		if(chartTimeStamp==null) {
-			this.low = ohlc.low;
+		if (chartTimeStamp == null) {
 			this.open = ohlc.open;
 			this.high = ohlc.high;
+			this.low = ohlc.low;
 		}
 		this.close = ohlc.close;
 		this.high = Math.max(high, ohlc.high);
@@ -73,7 +104,7 @@ public class OHLC implements Serializable {
 	}
 
 	public double profitPercent() {
-		return Math.abs(KiteNumberUtil.round((getProfit()/ low) * 100));
+		return Math.abs(KiteNumberUtil.round((getProfit() / low) * 100));
 	}
 
 	public String getCandleType() {
@@ -172,5 +203,9 @@ public class OHLC implements Serializable {
 
 	public void addAlgo(Algorithm algo) {
 		getAlgorithm().add(algo);
+	}
+
+	public String getTimeframe() {
+		return timeframe;
 	}
 }

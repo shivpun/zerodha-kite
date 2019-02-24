@@ -13,7 +13,9 @@ public class TrendIntensityIndex implements Algo {
 	private final int mperiod;
 	
 	private final SimpleMovingAverage sma;
+	
 	private final SimpleMovingAverage psma;
+	
 	private final SimpleMovingAverage nsma;
 	
 	private double dev;
